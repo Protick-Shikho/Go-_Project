@@ -3,8 +3,8 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	"time"
 	"log"
+	"time"
 )
 
 type Task struct {
@@ -17,7 +17,7 @@ type Task struct {
 
 func CreateTask(db *sql.DB, task Task) error {
 	query := "INSERT INTO tasks (title, description, status, created_at) VALUES (?, ?, ?, ?)"
-	_ , err := db.Exec(query, task.Title, task.Description, task.Status, time.Now())
+	_, err := db.Exec(query, task.Title, task.Description, task.Status, time.Now())
 
 	if err != nil {
 		return fmt.Errorf("CreateTask: %v", err)
@@ -59,7 +59,6 @@ func ShowTasks(db *sql.DB) {
 }
 
 func DeleteTask(db *sql.DB, id int) {
-	
 	query := "DELETE FROM tasks WHERE id = ?"
 	result, err := db.Exec(query, id)
 	if err != nil {
@@ -81,8 +80,7 @@ func DeleteTask(db *sql.DB, id int) {
 }
 
 func UpdateStatus(db *sql.DB, id int) error {
-
-	query := "UPDATE tasks SET status = 'Completed'  WHERE id = ?"
+	query := "UPDATE tasks SET status = 'Completed' WHERE id = ?"
 
 	result, err := db.Exec(query, id)
 	if err != nil {
@@ -94,7 +92,7 @@ func UpdateStatus(db *sql.DB, id int) error {
 		return fmt.Errorf("failed to retrieve affected rows: %w", err)
 	}
 	if rowsAffected == 0 {
-		log.Println("No task found with the specified ID, Maybe Its Completed Already.")
+		log.Println("No task found with the specified ID, maybe it's completed already.")
 	} else {
 		log.Print("Updated to status Completed")
 	}
