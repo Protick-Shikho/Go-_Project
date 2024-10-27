@@ -44,7 +44,6 @@ CREATE TABLE tasks (
 
 In the root directory of the project, create a .env file with your MySQL credentials:
 
-plaintext
 
 DB_USER=root
 DB_PASSWORD=your_password_here
